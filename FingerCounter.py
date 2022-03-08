@@ -38,11 +38,11 @@ while True:
         fingers = []
         print('List ', lmList)
 
-        # Thumb
-        if lmList[tipIds[0]][1] < lmList[tipIds[0] - 1][1]:
-            fingers.append(1)
-        else:
-            fingers.append(0)
+        # # Thumb
+        # if lmList[tipIds[0]][1] < lmList[tipIds[0] - 1][1]:
+        #     fingers.append(1)
+        # else:
+        #     fingers.append(0)
 
         # 4 Fingers
         for id in range(1, 5):
@@ -58,16 +58,16 @@ while True:
         h, w, c = overlayList[totalFingers - 1].shape
         img[0:h, 0:w] = overlayList[totalFingers - 1]
 
-        cv2.rectangle(img, (20, 225), (170, 425), (0, 255, 0), cv2.FILLED)
-        cv2.putText(img, str(totalFingers), (45, 375), cv2.FONT_HERSHEY_PLAIN,
-                    10, (255, 0, 0), 25)
-        # ts.check_matching(img,"show ", totalFingers)
+        # cv2.rectangle(img, (20, 225), (170, 425), (0, 255, 0), cv2.FILLED)
+        # cv2.putText(img, str(totalFingers), (45, 375), cv2.FONT_HERSHEY_PLAIN,
+        #             10, (255, 0, 0), 25)
+        ts.check_matching(img, totalFingers)
 
     cTime = time.time()
     fps = 1 / (cTime - pTime)
     pTime = cTime
 
-    cv2.putText(img, f'FPS: {int(fps)}',(400,70),cv2.FONT_HERSHEY_COMPLEX,1,(255,255,0),3)
+    cv2.putText(img, f'FPS: {int(fps)}',(500,50),cv2.FONT_HERSHEY_COMPLEX,1,(255,255,0),3)
 
     
     cv2.imshow("Image", img)
