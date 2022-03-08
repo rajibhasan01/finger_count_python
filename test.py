@@ -4,8 +4,10 @@ import time
 
 start = time.time()
 question = random.randint(0,4)
+qstn_ans = []
 
 def check_matching(img, count):
+    global qstn_ans;
     question = question_generate();
     txt = "Show " + str(question);
     show_image(img, txt);
@@ -13,13 +15,19 @@ def check_matching(img, count):
     print("Question",question);
     print("Count", count);
     
+    # if len(qstn_ans) <= 5:
     if count == question:
         result = "OK";
+        qstn_ans.append(1);
         show_result(img, result);
-    else:
+        # question = question_generate(result);
+    else:       
         print("Failed")
         result = "Failed";
+        qstn_ans.append(0);
         show_result(img, result);
+        
+    print("Question Ans ", qstn_ans);
         
 
     
@@ -34,13 +42,15 @@ def show_result(img, result, color =(0,0,0)):
     return img
 
 # Generate Question
-def question_generate():
+def question_generate(result = "failed"):
     end = time.time();
     global start
     global question
+    global qstn_ans
     print('start', start)
     print("End", end)
-    if start + 5 < end:
+    if start + 5 < end or result == "OK":
+        # if len(qstn_ans) <= 5:
         question = random.randint(0,4)
         start = time.time()
         return question
