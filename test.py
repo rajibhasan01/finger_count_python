@@ -6,13 +6,21 @@ start = time.time()
 question = random.randint(0,4)
 
 def check_matching(img, count):
-    question = question_generate()
+    question = question_generate();
     txt = "Show " + str(question);
-    show_image(img, txt)
-    
+    show_image(img, txt);
     
     print("Question",question);
+    print("Count", count);
     
+    if count == question:
+        result = "OK";
+        show_result(img, result);
+    else:
+        print("Failed")
+        result = "Failed";
+        show_result(img, result);
+        
 
     
 # Edit the Frame
@@ -21,7 +29,9 @@ def show_image(img,text,color = (0,0,0)):
     cv2.putText(img,text,(300,50),cv2.FONT_HERSHEY_COMPLEX,1,color,2)
     return img
 
-
+def show_result(img, result, color =(0,0,0)):
+    cv2.putText(img,result,(300,100),cv2.FONT_HERSHEY_COMPLEX,1,color,2)
+    return img
 
 # Generate Question
 def question_generate():
