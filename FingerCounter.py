@@ -17,7 +17,6 @@ print(myList)
 overlayList = []
 for imPath in myList:
     image = cv2.imread(f'{folderPath}/{imPath}')
-    # print(f'{folderPath}/{imPath}')
     overlayList.append(image)
 
 print(len(overlayList))
@@ -38,7 +37,7 @@ while True:
         fingers = []
         print('List ', lmList)
 
-        # # Thumb
+        # Thumb Finger Count
         # if lmList[tipIds[0]][1] < lmList[tipIds[0] - 1][1]:
         #     fingers.append(1)
         # else:
@@ -54,7 +53,8 @@ while True:
         print(fingers)
         totalFingers = fingers.count(1)
         print(totalFingers)
-
+        
+        # Show the folder image over the video
         h, w, c = overlayList[totalFingers - 1].shape
         img[0:h, 0:w] = overlayList[totalFingers - 1]
 
