@@ -8,9 +8,22 @@ question = random.randint(0,4)
 qstn_ans = []
 right_ans = []
 
+final_result = None
+
 def show_qstn(img,count="none"):
     question = question_generate(count);
-    txt = "Show " + str(question);
+    
+    if final_result == "pass":
+        # show_result(img, "Verified");
+        txt = "Verified"
+    
+    elif final_result == "failed":
+        # show_result(img, "Unverified")
+        txt = "Unverified"
+    
+    else:
+        txt = "Show " + str(question);
+        
     show_image(img, txt);
     
     # print("Question",question);
@@ -64,12 +77,20 @@ def question_generate(count):
     global qstn_ans
     # print('start', start)
     # print("End", end)
-    if start + 3 < end:
+    if start + 2 < end:
         # if len(qstn_ans) <= 5:
-        question = random.randint(0,4)
+        new_question = random.randint(0,4)
+        if question == new_question:
+            if question == 0:
+                new_question = question + 1
+            else:
+                new_question = question - 1
+        
+        question = new_question
         start = time.time()
         print("ans array", qstn_ans)
         answer_check(qstn_ans)
+        print('New_question', new_question)
         return question
     
     if count != "none":
@@ -84,6 +105,8 @@ def question_generate(count):
 
 # Answer Check
 def answer_check(ans):
+    global final_result
+    global right_ans
     total_number = len(ans);
     right_ans_count = ans.count(1)
     try:
@@ -92,19 +115,20 @@ def answer_check(ans):
         right_percentage = 0
     print("Percentage ", right_percentage);
     
-    if(right_percentage > 70):
+    if(right_percentage > 50):
         right_ans.append(1)
     else:
         right_ans.append(0)
         
     if len(right_ans) == 5:
         tik_mark = right_ans.count(1)
-        if tik_mark >= 4:
+        if tik_mark >= 4 and final_result == None:
             print ("Pass")
+            right_ans.clear()
+            final_result = "pass"
             return True
-        else:
+        elif tik_mark < 4 and final_result == None:
             print("Failed")
+            right_ans.clear()
+            final_result = "failed"
             return False
-    global qstn_ans
-    qstn_ans.clear()
-    
