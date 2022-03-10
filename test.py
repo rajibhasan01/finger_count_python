@@ -22,7 +22,7 @@ def show_qstn(img,count="none"):
         txt = "Unverified"
     
     else:
-        txt = "Show " + str(question);
+        txt = "Show Finger " + str(question);
         
     show_image(img, txt);
     
@@ -61,8 +61,8 @@ def check_matching(img, count):
     
 # Edit the Frame
 def show_image(img,text,color = (0,0,0)):
-    cv2.rectangle(img, (250, 20), (470, 60), (0, 255, 0), cv2.FILLED)
-    cv2.putText(img,text,(300,50),cv2.FONT_HERSHEY_COMPLEX,1,color,2)
+    cv2.rectangle(img, (180, 20), (470, 60), (0, 255, 0), cv2.FILLED)
+    cv2.putText(img,text,(200,50),cv2.FONT_HERSHEY_COMPLEX,1,color,2)
     return img
 
 def show_result(img, result, color =(0,0,0)):
@@ -77,7 +77,7 @@ def question_generate(count):
     global qstn_ans
     # print('start', start)
     # print("End", end)
-    if start + 2 < end:
+    if start + 3 < end:
         # if len(qstn_ans) <= 5:
         new_question = random.randint(0,4)
         if question == new_question:
